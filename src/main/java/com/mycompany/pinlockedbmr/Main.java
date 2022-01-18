@@ -15,8 +15,7 @@ import java.io.Serializable;
 /**
  *
  * @author Kian Frawley
- * @version 0.04 //0.04 Added a feature to change user data fields.
- *   //TO-Do add feature to save data to a binary file and then read it back in.
+ * @version 0.05, 0.05 adds the ability to save user info from instance to instance.
  */
 public class Main   
 {
@@ -53,9 +52,7 @@ public class Main
                  
            }while(u1.getPIN() != guess);   
            
-           ////////////
-                       //Loads users info.
-           //////////
+
            do{
            System.out.println(" ______________________________________");
            System.out.println("|Hello and Welcome to CalTracker v0.03|");
