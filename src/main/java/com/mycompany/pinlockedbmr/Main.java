@@ -8,9 +8,10 @@ import java.util.Scanner;
 /**
  *
  * @author Kian Frawley
- * @version 0.03
+ * @version 0.04 //0.04 Added a feature to change user data fields.
  */
-public class Main {
+public class Main   
+{
 
     /**
      * @param args the command line arguments
@@ -29,10 +30,10 @@ public class Main {
            do
            {
                 System.out.println("Please Enter Access PIN.");
-                //System.out.println("──▄▀▀▀▄───────────────");
-                //System.out.println("──█──────█───────────────");
-                //System.out.println("─███████─────────▄▀▀▄─");
-                //System.out.println("░███─▀─██░░█▀█▀▀▀▀█░░█░");
+                //System.out.println("───▄▀▀▀▄──────────────────────────────");
+                //System.out.println("───█──────█──────────────────────────────");
+                //System.out.println("──███████─────────────────▄▀▀▄─");
+                //System.out.println("░███─███░░█▀█▀▀▀▀█░░█░");
                 //System.out.println("░███▄███░░▀░▀░░░░░▀▀░░");
                 
                 guess = Integer.parseInt(in.nextLine());
@@ -46,6 +47,7 @@ public class Main {
            System.out.println("|1.Calculate BMR.                     |");
            System.out.println("|2.Log Daliy Caloric Intake.          |");
            System.out.println("|3.Display User Info.                 |");
+           System.out.println("|4.Edit User info.                    |");
            System.out.println("|0.End Application.                   |");
            System.out.println("|_____________________________________|");
            
@@ -62,7 +64,11 @@ public class Main {
                 break;
                
                case 3:
-                 System.out.println(u1.toString());
+                System.out.println(u1);
+                break;
+                
+               case 4:
+                   u1.editInfo();
                 break;
                 
                case 0:

@@ -112,7 +112,7 @@ public class User {
     * 
     * @param height the users height.     
     **/
-    public void setheight(int height)
+    public void setHeight(int height)
     {
       this.height = height;
     }
@@ -225,6 +225,112 @@ public class User {
         else 
             throw new BmrException();
         }
+    
+       public void editInfo()
+       {
+        int input; 
+       
+        Scanner in = new Scanner(System.in); 
+        
+           do 
+           {   
+              
+           System.out.println(" ______________________________________");
+           System.out.println("|What field would you like to edit.    |");
+           System.out.println("|1.Edit BMR.                           |");
+           System.out.println("|2.Edit Age.                           |");
+           System.out.println("|3.Edit Weight.                        |");
+           System.out.println("|4.Edit Height.                        |");
+           System.out.println("|5.Edit PIN.                           |");
+           System.out.println("|6.Edit Gender.                        |");
+           System.out.println("|7.Edit uname.                         |");
+           System.out.println("|0.Exit To Home.                       |");
+           System.out.println("|______________________________________|");  
+           
+           input = in.nextInt();
+           
+           switch(input)
+           {
+               
+               case 1:
+                  System.out.println("Log your weight below!");
+                  setBMR(Double.parseDouble(in.next()));
+                  System.out.println("Your BMR is now " + getBMR() + '!');
+                  
+                  break;
+               
+               case 2:  
+                  System.out.println("Log your age below!");
+                  setAge(Integer.parseInt((in.next())));
+                  System.out.println("Your age is now " + getAge() + '!');
+                   
+                  break;
+                  
+                case 3:  
+                  System.out.println("Log your weight below!");
+                  setWeight(Integer.parseInt((in.next())));
+                  System.out.println("Your weight is now " + getWeight() + '!');
+                   
+                  break; 
+               
+                case 4:  
+                  System.out.println("Log your height below!");
+                  setHeight(Integer.parseInt((in.next())));
+                  System.out.println("Your Height is now " + getHeight() + '!');
+                   
+                  break;  
+                
+                case 5:  
+                  System.out.println("Log your PIN below!");
+                  setPIN(Integer.parseInt((in.next())));
+                  System.out.println("Your PIN is now " + getPIN() + '!');
+                   
+                  break;  
+                  
+                case 6:  
+                  System.out.println("Pick your Gender below!");
+                  System.out.println(" ______________________ ");
+                  System.out.println("|1.Male                |");
+                  System.out.println("|2.Female              |");
+                  System.out.println("|______________________|");
+                    input  = in.nextInt();
+                    
+                   do{
+                   
+                        if(input == 1)
+                        {
+                            setGender(false); 
+                            System.out.println("Your Gender is now male" + '!');
+                            input = 3;
+                        }
+                        
+                        if(input == 2)
+                        {
+                            setGender(true);
+                            System.out.println("Your Gender is now female" + '!');
+                            input = 3;
+                        }
+          
+                   }while(input != 3);
+                    
+
+                  break;
+                  
+                case 7:
+                  System.out.println("Log your name below!");
+                  setuname(in.next());
+                  System.out.println("Your age is now " + getUname() + '!');
+                  
+                  
+               case 0:
+                 
+                 break;
+               
+               
+           }    
+           
+           }while(input != 0);
+       }
         
      /**
      * toString method for a user object, returns descriptive information
