@@ -130,28 +130,3 @@ public class Main
        }  
     }
 }
-   /* 
-     * Method used to save users data to file using serialization.
-     * 
-     * @throws FileNotFoundException
-     
-    public void output() throws FileNotFoundException, IOException
-    {
-       
-        FileOutputStream fileOut = new FileOutputStream("User.ser");
-        ObjectOutputStream out = new ObjectOutputStream(fileOut);
-        out.writeObject(u1);
-    }  
-    
-    /**
-     * Method used to load users data from file using serialization.
-     
-    public void input()
-    {
-       
-    }  
-        
-    
-    }
-        */
-
