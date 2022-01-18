@@ -3,30 +3,43 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package com.mycompany.pinlockedbmr;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.InputMismatchException; 
 import java.util.Scanner;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 /**
  *
  * @author Kian Frawley
  * @version 0.04 //0.04 Added a feature to change user data fields.
+ *   //TO-Do add feature to save data to a binary file and then read it back in.
  */
 public class Main   
 {
-
+   
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
         int guess;
         int pick;
-        
+
         Scanner in = new Scanner(System.in);
         
        try
        {
-          
-        
-           User u1 = new User();
+           // Should Load User info.
+           User u1 = null;
+           FileInputStream fileIn = new FileInputStream("User.ser");
+           ObjectInputStream inObj = new ObjectInputStream(fileIn);
+           u1 = (User)inObj.readObject();
+           inObj.close();
+           fileIn.close();
+           //
            do
            {
                 System.out.println("Please Enter Access PIN.");
@@ -40,6 +53,9 @@ public class Main
                  
            }while(u1.getPIN() != guess);   
            
+           ////////////
+                       //Loads users info.
+           //////////
            do{
            System.out.println(" ______________________________________");
            System.out.println("|Hello and Welcome to CalTracker v0.03|");
@@ -48,6 +64,7 @@ public class Main
            System.out.println("|2.Log Daliy Caloric Intake.          |");
            System.out.println("|3.Display User Info.                 |");
            System.out.println("|4.Edit User info.                    |");
+           System.out.println("|5.Save User info.                    |");
            System.out.println("|0.End Application.                   |");
            System.out.println("|_____________________________________|");
            
@@ -69,6 +86,15 @@ public class Main
                 
                case 4:
                    u1.editInfo();
+                break; 
+               
+               case 5:
+                FileOutputStream fileOut = new FileOutputStream("User.ser");
+                ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                out.writeObject(u1);
+                System.out.println("Data has been saved!!");
+                out.close();
+                fileOut.close();
                 break;
                 
                case 0:
@@ -79,6 +105,9 @@ public class Main
           
            }while(pick != 0);
        }
+       
+       
+       
        catch(BmrException ex)
        {
          System.out.println(ex);
@@ -87,12 +116,45 @@ public class Main
        {
            System.out.println(ex);
        }
-       catch(Exception ex)
+       
+       catch(FileNotFoundException ex)
        {
            System.out.println(ex);
        }
        
-       }
+      catch(IOException ex)
+        {
+            System.out.println("File read/write error!");
+        }
+       
+       catch(Exception ex)
+       {
+           System.out.println(ex);
+       }  
     }
+}
+   /* 
+     * Method used to save users data to file using serialization.
+     * 
+     * @throws FileNotFoundException
+     
+    public void output() throws FileNotFoundException, IOException
+    {
+       
+        FileOutputStream fileOut = new FileOutputStream("User.ser");
+        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+        out.writeObject(u1);
+    }  
     
+    /**
+     * Method used to load users data from file using serialization.
+     
+    public void input()
+    {
+       
+    }  
+        
+    
+    }
+        */
 

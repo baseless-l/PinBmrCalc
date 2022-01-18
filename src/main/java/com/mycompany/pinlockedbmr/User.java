@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.pinlockedbmr;
+import java.io.Serializable;
 import java.time.LocalDateTime;  
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -13,7 +14,8 @@ import java.util.Scanner;
  *
  * @author Kian Frawley
  */
-public class User {
+public class User implements Serializable
+{
     int PIN = 2000;
     int age = 25; //In years
     int weight = 160; //In pounds
@@ -187,7 +189,9 @@ public class User {
      {
         return BMR;
      }
-    
+    /**
+     * Method used to preform calculation that determines BMR data field.
+     */
     public void calcBMR()
     {
     
@@ -200,7 +204,11 @@ public class User {
            setBMR(66 + (6.23 * getWeight()) + (12.7 * getHeight()) - (6.8 * getAge())); 
            System.out.println("Your Baseline metabolic rate is " + String.format("%.2f", getBMR()));
     }
-    
+    /**
+     * Method to determine if the user is in a state of caloric deficit, maintance, or surplus.
+     * 
+     * @throws BmrException 
+     */
     public void daliyIntake() throws BmrException
     {
         Scanner in = new Scanner(System.in);    
@@ -209,27 +217,31 @@ public class User {
         
         double c = Double.parseDouble(in.nextLine());
         
-        if(BMR > 0.0)
+        if(getBMR() > 0.0)
         {
             if(getBMR() > c)
             {      
-               System.out.println("You have eaten less then you BMR, You are in a caloric deficit of " + String.format("%.2f",(getBMR() - c)) + "calories!"); //If you do not format the result will have a binary rounding error.
+               System.out.println("You have eaten less then you BMR, You are in a caloric deficit of " + String.format("%.2f",(getBMR() - c)) + " calories!"); //If you do not format the result will have a binary rounding error.
             }    
             if(getBMR() < c)
             {
-               System.out.println("You have eaten more then you BMR, You are in a caloric surplus of " + String.format("%.2f",(c - getBMR())) + "calories!"); 
+               System.out.println("You have eaten more then you BMR, You are in a caloric surplus of " + String.format("%.2f",-(getBMR() - c)) + " calories!"); 
             }
-            else
-                System.out.println("You are in a state of caloric maintance");
+            if(getBMR() == c)
+            {   
+                System.out.println("You are in a state of caloric maintance!");
+            }
         }
         else 
             throw new BmrException();
         }
-    
+       /**
+        * Method used to edit users data fields.
+        */
        public void editInfo()
        {
         int input; 
-       
+      
         Scanner in = new Scanner(System.in); 
         
            do 
@@ -243,7 +255,7 @@ public class User {
            System.out.println("|4.Edit Height.                        |");
            System.out.println("|5.Edit PIN.                           |");
            System.out.println("|6.Edit Gender.                        |");
-           System.out.println("|7.Edit uname.                         |");
+           System.out.println("|7.Edit Name.                         |");
            System.out.println("|0.Exit To Home.                       |");
            System.out.println("|______________________________________|");  
            
@@ -253,7 +265,7 @@ public class User {
            {
                
                case 1:
-                  System.out.println("Log your weight below!");
+                  System.out.println("Log your BMR below!");
                   setBMR(Double.parseDouble(in.next()));
                   System.out.println("Your BMR is now " + getBMR() + '!');
                   
@@ -319,7 +331,7 @@ public class User {
                 case 7:
                   System.out.println("Log your name below!");
                   setuname(in.next());
-                  System.out.println("Your age is now " + getUname() + '!');
+                  System.out.println("Your name is now " + getUname() + '!');
                   
                   
                case 0:
@@ -332,6 +344,22 @@ public class User {
            }while(input != 0);
        }
         
+      /**
+      * Method used to save user data fields to a file.
+      */
+      public void output()
+      {
+        
+      }    
+       
+      /**
+      * Method used to load user data fields from a file.
+      */
+      public void input()
+      {
+        
+      }     
+       
      /**
      * toString method for a user object, returns descriptive information
      * regarding user. 
